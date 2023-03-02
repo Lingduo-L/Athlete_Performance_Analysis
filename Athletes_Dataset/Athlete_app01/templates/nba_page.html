@@ -1,0 +1,109 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Athletes' Analysis Main Page</title>
+    <link rel="stylesheet" href={% static 'plugins/bootstrap-5.2.3/css/bootstrap.css' %}>
+    <style>
+        #navbarTogglerDemo03 {
+            margin-left: 240px;
+        }
+        .nav-link {
+            width: 100px;
+        }
+        .selection01{
+            font-size: 15px;
+            height : 38px;
+            border:0.5px;
+        }
+        .col_width{
+            width: 100px;
+        }
+        .table_bar{
+            position: relative;
+            display: inline-block;
+        }
+
+        .table_bar .table_bar_form{
+            position : relative;
+            display: inline-block;
+            width : 1000px;
+        }
+        .table_bar .table_bar_form .table_bar1_left{
+            float: left;
+            display: inline-block;
+        }
+        .table_bar .table_bar_form .table_bar1_right{
+            float: right;
+            display: inline-block;
+        }
+
+        .navparent{
+            position : relative;
+        }
+        .table_bar2{
+            float: right;
+            display: inline-block;
+            right:250px;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-dark bg-dark">
+    <div class="nav-item active">
+        <h5 style="color: white; margin-left: 20px; margin-top: 10px;">Athlete Career Database</h5>
+    </div>
+</nav>
+<nav class="navbar navbar-expand-lg navbar-light bg-light navparent">
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <li class="nav-item active">
+                <a class="nav-link" href="/athletesDB/">Soccer</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/athletesDB/Tennis">Tennis</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/athletesDB/NBA" style="color: black; font-size: 17px;">NBA</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/athletesDB/NFL">NFL</a>
+            </li>
+        </ul>
+    </div>
+    <div class="btn-group btn-group-toggle table_bar2">
+        <a href="/athletesDB/Search_NBA"  class="nav-link">Search</a>
+    </div>
+</nav>
+<div>
+    <div class="container">
+        <h3> table of NBA players </h3>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th class = 'col_width' scope="col">ID</th>
+                {% for item in table_col %}
+                <th class = 'col_width' scope="col">{{ item }}</th>
+                {% endfor %}
+            </tr>
+            </thead>
+            <tbody>
+                {% for item in table_body %}
+                <tr>
+                    {% for row in item %}
+                    <td class = 'col_width'>{{ row }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+</div>
+
+<script src="{% static 'plugins/bootstrap-5.2.3/js/bootstrap.js' %}"></script>
+<script src="{% static 'js/jquery-3.6.1.min.js' %}"></script>
+</body>
+</html>

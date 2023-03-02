@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+    <link rel="stylesheet" href={% static 'plugins/bootstrap-5.2.3/css/bootstrap.css' %}>
+    <style>
+        .searchbar{
+            position: relative;
+        }
+        .searchinput{
+            display: inline-block;
+            float: left;
+            width:300px;
+        }
+        .searchinput2{
+            display: inline-block;
+            float: left;
+            width:500px;
+        }
+        .searchbutton {
+            display: block;
+            float: left;
+            margin-right: 20px;
+        }
+        .table_bar2{
+            float:right;
+            display: inline-block;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="nav-item active">
+        <div>
+        <h5 style="color: white; background-color: #1e2125;height:60px;padding-left:20px; padding-top:18px;">check table of NBA players by Team or Player Name</h5>
+        </div>
+    </div>
+    <div style="height: 30px"></div>
+    <div class="container">
+        <div class="btn-group btn-group-toggle table_bar2">
+            <a href="/athletesDB/Search_NBA"  class="nav-link">Back</a>
+        </div>
+        <form method='post'>
+            {% csrf_token %}
+            <div class="searchbar">
+                <input name='searchByTeam' class="form-control mr-sm-2 searchinput" type="search"
+                       placeholder="Search By Team" aria-label="Search">
+                <button class="btn btn-outline-dark my-2 my-sm-0 searchbutton" type="submit">Search</button>
+            </div>
+            <div class="searchbar">
+                <input name='searchByName' class="form-control mr-sm-2 searchinput" type="search"
+                       placeholder="Search By Name" aria-label="Search">
+                <button class="btn btn-outline-dark my-2 my-sm-0 searchbutton" type="submit">Search</button>
+            </div>
+
+            <div style="clear: both">
+                <div>you can also check by codes, the field name are:</div>
+                ID,Player,Pos,Age,Team,Games,Minutes Played,Fields Goal,Fields Goal Attempted,3-points Field Goal,3-points Field Goal Attempted,2-points Field Goal,2-points Field Goal Attempted,Free Throws,Free Throws Attempted,Offensive Rebounds,Defensive Rebounds,Total Rebounds,Assists,Steals,Blocks,Turnovers,Personal Fouls,Points,Rank,Year
+
+            </div>
+            <div class="searchbar">
+                <input name='searchByCode' class="form-control mr-sm-2 searchinput2" type="search"
+                       placeholder="Team=OKC" aria-label="Search">
+                <button class="btn btn-outline-dark my-2 my-sm-0 searchbutton" type="submit">Search</button>
+            </div>
+        </form>
+    {% if returnprint == 'table' %}
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th class = 'col_width' scope="col">ID</th>
+                {% for item in table_col %}
+                <th class = 'col_width' scope="col">{{ item }}</th>
+                {% endfor %}
+            </tr>
+            </thead>
+            <tbody>
+                {% for item in table_body %}
+                <tr>
+                    {% for row in item %}
+                    <td class = 'col_width'>{{ row }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% elif returnprint == 'pictures' %}
+    <img src="{% static returnpicture %}" alt="Important Scores' histogram">
+    {% endif %}
+    </div>
+<script src="{% static 'plugins/bootstrap-5.2.3/js/bootstrap.js' %}"></script>
+<script src="{% static 'js/jquery-3.6.1.min.js' %}"></script>
+</body>
+</html>

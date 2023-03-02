@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+    <link rel="stylesheet" href={% static 'plugins/bootstrap-5.2.3/css/bootstrap.css' %}>
+    <style>
+        .searchbar{
+            position: relative;
+        }
+        .searchinput{
+            display: inline-block;
+            float: left;
+            width:300px;
+        }
+        .searchbutton {
+            display: block;
+            float: left;
+            margin-right: 20px;
+        }
+        .table_bar2{
+            float:right;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-item active">
+        <div>
+        <h5 style="color: white; background-color: #1e2125;height:60px;padding-left:20px; padding-top:18px;">Check all hard/grass/clay raw and ELO rating by Player_Name</h5>
+        </div>
+
+    </div>
+    <div style="height: 30px"></div>
+    <div class="container">
+        <div class="btn btn-dark table_bar2">
+            <a href="/athletesDB/Search_Tennis"  class="nav-link">Back</a>
+        </div>
+        <form method='post'>
+            {% csrf_token %}
+            <div class="searchbar">
+                <input name='searchByName' class="form-control mr-sm-2 searchinput" type="search"
+                       placeholder="Search By Athlete" aria-label="Search">
+                <button class="btn btn-outline-dark my-2 my-sm-0 searchbutton" type="submit">Search</button>
+            </div>
+            <div class="searchbar">
+                <input name='searchByPlayerID' class="form-control mr-sm-2 searchinput" type="search"
+                       placeholder="Search By PlayerID" aria-label="Search">
+                <button class="btn btn-outline-dark my-2 my-sm-0 searchbutton" type="submit">Search</button>
+            </div>
+        </form>
+    {% if returnprint == 'Need to type correct name!' %}
+        <h3>Need to type correct name!</h3>
+    {% elif returnprint == 'id need to be less than 783!' %}
+        <h3>id need to be less than 783!</h3>
+    {% endif %}
+    </div>
+    <div style ="margin-left: 120px">
+        {% if returnprint == 'pictures' %}
+        <img src="{% static returnpicture %}" alt="ELO histogram">
+        {% endif %}
+    </div>
+<script src="{% static 'plugins/bootstrap-5.2.3/js/bootstrap.js' %}"></script>
+<script src="{% static 'js/jquery-3.6.1.min.js' %}"></script>
+</body>
+</html>

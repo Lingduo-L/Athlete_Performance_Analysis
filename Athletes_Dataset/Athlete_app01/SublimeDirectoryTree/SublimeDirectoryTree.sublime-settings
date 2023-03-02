@@ -1,0 +1,19 @@
+{
+    /*
+     * mode explain:
+     * df: Directory First,
+     * do: Directory Only,
+     * ff: File First,
+     * od: Ordered
+     */
+    "args": {
+        "mode": "ff",
+        "layer": 3,
+        "indent": 4,
+        "sparse": false,
+        "show_size": false,
+        "show_hidden": false,
+        "dir_tail_character": "/",
+        "show_absolute_path_of_rootdir": false
+    }
+}

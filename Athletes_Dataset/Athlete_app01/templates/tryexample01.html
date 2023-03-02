@@ -1,0 +1,51 @@
+{%  load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href={%  static 'plugins/bootstrap-5.2.3/css/bootstrap.css' %}>
+</head>
+<body>
+    <h1>Django example1: 模版语法学习</h1>
+    <div>produced by {{ n1 }}</div>
+        <div>
+            <table style="border: 1px solid #86b7fe ">
+                <tr>
+                    <th>Name</th>
+                    <th>Group Number</th>
+                    <th>Take charge</th>
+                </tr>
+                {% for item in n2 %}
+                <tr>
+                    <td>{{ item.0 }}</td>
+                    <td>{{ item.1 }}</td>
+                    <td>{{ item.2 }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+
+    <form method='post' action="/example/test1">
+        {% csrf_token %}
+        <select name='sports_selection'>
+            <option>Soccer</option>
+            <option>Tennis</option>
+            <option>NBA</option>
+            <option>NFL</option>
+        </select>
+        <input type="submit" value="check"/>
+    </form>
+    <h3>I choose {{ n3.sports_selection }}</h3>
+
+    {% if n3.sports_selection == "Soccer" %}
+        <h1>Soccer_table</h1>
+    {% else %}
+        <h1>others' table</h1>
+    {% endif %}
+
+    <script src="{% static 'plugins/bootstrap-5.2.3/js/bootstrap.js' %}"></script>
+    <script src="{% static 'js/jquery-3.6.1.min.js' %}"></script>
+</body>
+</html>

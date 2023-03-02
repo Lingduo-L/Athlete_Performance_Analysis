@@ -1,0 +1,86 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>login</title>
+    <link rel="stylesheet" href={% static 'plugins/bootstrap-5.2.3/css/bootstrap.css' %}>
+    <style>
+        .searchbar{
+            position: relative;
+        }
+        .searchinput{
+            display: inline-block;
+            float: left;
+            width:300px;
+        }
+        .searchbutton {
+            display: block;
+            float: left;
+            margin-right: 20px;
+        }
+        .table_bar2{
+            float:right;
+            display: inline-block;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="nav-item active">
+        <div>
+        <h5 style="color: white; background-color: #1e2125;height:60px;padding-left:20px; padding-top:18px;">Check indicators that have contributed to the Rating by Player_Name, Club_name or Player_ID</h5>
+        </div>
+    </div>
+    <div style="height: 30px"></div>
+    <div class="container">
+        <div class="btn btn-dark table_bar2">
+            <a href="/athletesDB/"  class="nav-link">Back</a>
+        </div>
+        <form method='post'>
+            {% csrf_token %}
+            <div class="searchbar">
+                <input name='searchByName' class="form-control mr-sm-2 searchinput" type="search"
+                       placeholder="Search By Athlete" aria-label="Search">
+                <button class="btn btn-outline-dark my-2 my-sm-0 searchbutton" type="submit">Search</button>
+            </div>
+            <div class="searchbar">
+                <input name='searchByClub' class="form-control mr-sm-2 searchinput" type="search"
+                       placeholder="Search By Club" aria-label="Search">
+                <button class="btn btn-outline-dark my-2 my-sm-0 searchbutton" type="submit">Search</button>
+            </div>
+            <div class="searchbar">
+                <input name='checkDistribution' class="form-control mr-sm-2 searchinput" type="search"
+                       placeholder="Search By Correct Player ID" aria-label="Search">
+                <button class="btn btn-outline-dark my-2 my-sm-0 searchbutton" type="submit">Search</button>
+            </div>
+        </form>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th class='col_width' scope="col">#</th>
+                    {% for item in table_col %}
+                        <th class='col_width' scope="col">{{ item }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in table_body %}
+                <tr>
+                    {% for row in item %}
+                        <td class='col_width'>{{ row }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div style ="margin-left: 120px">
+        {% if returnprint == 'pictures' %}
+            <img src="{% static returnpicture %}" alt="important scores' histograms">
+        {%  endif %}
+    </div>
+<script src="{% static 'plugins/bootstrap-5.2.3/js/bootstrap.js' %}"></script>
+<script src="{% static 'js/jquery-3.6.1.min.js' %}"></script>
+</body>
+</html>
